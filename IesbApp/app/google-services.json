@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "717668407471",
+    "firebase_url": "https://iesbapp-a5380.firebaseio.com",
+    "project_id": "iesbapp-a5380",
+    "storage_bucket": "iesbapp-a5380.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717668407471:android:07bfd0bc5e1d4c4c",
+        "android_client_info": {
+          "package_name": "com.iesb.sergio.iesbapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717668407471-m4ih5t8tppmf1d4fafgi28h2sm835040.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.iesb.sergio.iesbapp",
+            "certificate_hash": "B6272596FD93388B2B89FA5C6AF72C5F2BD856FD"
+          }
+        },
+        {
+          "client_id": "717668407471-j02e8oqd1ds0ap8tfdr43o2g10c2j3iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcvOQxS4RWVNhLIWVZQgECAKIgKyJPc3Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717668407471-j02e8oqd1ds0ap8tfdr43o2g10c2j3iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

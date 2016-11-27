@@ -7,12 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:fitsSystemWindows="true"
     tools:context="com.iesb.sergio.iesbapp.MainActivity">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/emailEditText"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
@@ -26,10 +27,10 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_below="@+id/editText"
-        android:layout_alignEnd="@+id/editText"
-        android:layout_alignStart="@+id/editText"
+        android:id="@+id/passwordEditText"
+        android:layout_below="@+id/emailEditText"
+        android:layout_alignEnd="@+id/emailEditText"
+        android:layout_alignStart="@+id/emailEditText"
         android:layout_marginTop="8dp"
         android:hint="Senha"
         android:gravity="center" />
@@ -38,18 +39,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Entrar"
-        android:id="@+id/button"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="16dp"
-        android:layout_alignEnd="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+        android:id="@+id/loginButton"
+        android:layout_below="@+id/passwordEditText"
+        android:layout_alignStart="@+id/btnRegister"
+        android:layout_alignEnd="@+id/btnRegister"
+        android:layout_marginTop="8dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cadastrar"
-        android:id="@+id/button2"
-        android:layout_below="@+id/button"
+        android:id="@+id/btnRegister"
+        android:layout_below="@+id/loginButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="8dp" />
 </RelativeLayout>
