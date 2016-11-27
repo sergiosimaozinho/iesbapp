@@ -64,10 +64,9 @@ public class RegisterActivity extends AppCompatActivity {
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                        // progressBar.setVisibility(View.GONE);
+
                         if (!task.isSuccessful()) {
-                            Toast.makeText(RegisterActivity.this, "Authentication failed." + task.getException(),
+                            Toast.makeText(RegisterActivity.this, "Falha ao Cadastrar usuário, verifique se o e-mail ja foi cadastrado",
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(RegisterActivity.this, "Registrado com sucesso !",

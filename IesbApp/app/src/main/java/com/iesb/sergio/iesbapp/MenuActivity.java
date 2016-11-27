@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,6 +31,7 @@ public class MenuActivity extends AppCompatActivity {
 
         mListView = (ListView) findViewById(R.id.menuListView);
         mAuth = FirebaseAuth.getInstance();
+        configureAuthStateListener();
 
         final ArrayList<String> itensMenu = new ArrayList<>();
         itensMenu.add("Horário de Aulas");
@@ -48,21 +50,53 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-                if (position == 5) {
-                    mAuth.signOut();
+
+                switch (position) {
+                    case 4:
+                        startActivity(new Intent(MenuActivity.this, MapsActivity.class));
+                        break;
+                    case 5:
+                        mAuth.signOut();
+                        break;
+                    default:
+
+                        int itemPosition  = position;
+                        String  itemValue    = (String) mListView.getItemAtPosition(position);
+
+                        Toast.makeText(getApplicationContext(),
+                                "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
+                                .show();
+                        break;
                 }
-
-                // ListView Clicked item index
-                int itemPosition  = position;
-
-                // ListView Clicked item value
-                String  itemValue    = (String) mListView.getItemAtPosition(position);
-
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                        .show();
             }
         });
     }
+
+
+    private void configureAuthStateListener() {
+        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user == null) {
+                    // user auth state is changed - user is null
+                    // launch login activity
+                    startActivity(new Intent(MenuActivity.this, MainActivity.class));
+                    finish();
+                }
+            }
+        };
+        mAuth.addAuthStateListener(authListener);
+    }
+
+
+
+
+
+
+
+
+
+
+
 }
