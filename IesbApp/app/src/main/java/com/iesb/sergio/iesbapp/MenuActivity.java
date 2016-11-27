@@ -52,6 +52,10 @@ public class MenuActivity extends AppCompatActivity {
 
 
                 switch (position) {
+
+                    case 3:
+                        startActivity(new Intent(MenuActivity.this, UserInfoActivity.class));
+                        break;
                     case 4:
                         startActivity(new Intent(MenuActivity.this, MapsActivity.class));
                         break;

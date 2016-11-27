@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -31,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.register);
 
         mAuth = FirebaseAuth.getInstance();
+        configAuthStateChanged();
 
         nameEditText = (EditText)   findViewById(R.id.nameRegisterEditText);
         emailEditText = (EditText)  findViewById(R.id.emailRegisterEditText);
@@ -69,6 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this, "Falha ao Cadastrar usuário, verifique se o e-mail ja foi cadastrado",
                                     Toast.LENGTH_SHORT).show();
                         } else {
+
                             Toast.makeText(RegisterActivity.this, "Registrado com sucesso !",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
@@ -76,6 +81,31 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+    }
+
+
+    private void configAuthStateChanged() {
+
+        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+
+                if (user != null) {
+                    String name = nameEditText.getText().toString();
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
+
+                    user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("Sucesso", "User profile updated.");
+                            }
+                        }
+                    });
+                }
             }
         });
     }
