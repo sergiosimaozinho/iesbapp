@@ -27,14 +27,12 @@ public class RegisterActivity extends AppCompatActivity {
     private Button btnRegister;
     private FirebaseAuth mAuth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
 
         mAuth = FirebaseAuth.getInstance();
-        configAuthStateChanged();
 
         nameEditText = (EditText)   findViewById(R.id.nameRegisterEditText);
         emailEditText = (EditText)  findViewById(R.id.emailRegisterEditText);
@@ -72,8 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Falha ao Cadastrar usuário, verifique se o e-mail ja foi cadastrado",
                                     Toast.LENGTH_SHORT).show();
-                        } else {
 
+                        } else {
+                            saveData();
                             Toast.makeText(RegisterActivity.this, "Registrado com sucesso !",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
@@ -85,28 +84,21 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
+    private void saveData() {
+        FirebaseUser user = mAuth.getCurrentUser();
 
-    private void configAuthStateChanged() {
+        if (user != null) {
+            String name = nameEditText.getText().toString();
+            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
 
-        mAuth.addAuthStateListener(new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                if (user != null) {
-                    String name = nameEditText.getText().toString();
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(name).build();
-
-                    user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("Sucesso", "User profile updated.");
-                            }
-                        }
-                    });
+            user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Log.d("Sucesso", "User profile updated.");
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 }

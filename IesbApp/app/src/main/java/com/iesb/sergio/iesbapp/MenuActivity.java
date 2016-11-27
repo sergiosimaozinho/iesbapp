@@ -50,9 +50,10 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
-
                 switch (position) {
-
+                    case 0:
+                        startActivity(new Intent(MenuActivity.this, UserDisciplineActivity.class));
+                        break;
                     case 3:
                         startActivity(new Intent(MenuActivity.this, UserInfoActivity.class));
                         break;
