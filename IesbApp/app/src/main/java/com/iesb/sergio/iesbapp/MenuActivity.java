@@ -51,11 +51,14 @@ public class MenuActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 switch (position) {
-                    case 0:
+                    case 1:
+                        startActivity(new Intent(MenuActivity.this, GradesActivity.class));
+                        break;
+                    case 2:
                         startActivity(new Intent(MenuActivity.this, UserDisciplineActivity.class));
                         break;
                     case 3:
-                        startActivity(new Intent(MenuActivity.this, UserInfoActivity.class));
+                        startActivity(new Intent("com.iesb.sergio.iesbapp.UserInfoActivity"));
                         break;
                     case 4:
                         startActivity(new Intent(MenuActivity.this, MapsActivity.class));

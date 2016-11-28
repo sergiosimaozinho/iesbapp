@@ -3,7 +3,6 @@ package com.iesb.sergio.iesbapp;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -13,36 +12,37 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.iesb.sergio.iesbapp.model.Discipline;
-import com.iesb.sergio.iesbapp.model.UserDiscipline;
+import com.iesb.sergio.iesbapp.model.Grade;
 
 import java.util.ArrayList;
-import java.util.List;
+
+public class GradesActivity extends AppCompatActivity {
 
 
-public class UserDisciplineActivity extends AppCompatActivity {
-
-    private static DisciplineListAdapter adapter;
+    private static GradesListAdapter adapter;
     private ListView mListView;
-    private ArrayList<Discipline> disciplines = new ArrayList<>();
+    private ArrayList<Grade> grades = new ArrayList<>();
     private DatabaseReference mDatabase;
 
-    private static String USER_TABLE_NAME = "UserDiscipline";
+    private static String GRADES_TABLE_NAME = "GradesTable";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_discipline);
+        setContentView(R.layout.grades);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        mDatabase.child(USER_TABLE_NAME).addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child(GRADES_TABLE_NAME).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<ArrayList<Discipline>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<Discipline>>() {};
-                ArrayList<Discipline> news = dataSnapshot.getValue(genericTypeIndicator);
+                GenericTypeIndicator<ArrayList<Grade>> genericTypeIndicator = new GenericTypeIndicator<ArrayList<Grade>>() {};
+                ArrayList<Grade> news = dataSnapshot.getValue(genericTypeIndicator);
 
-                disciplines.addAll(news);
-                adapter = new DisciplineListAdapter(getApplicationContext(),disciplines);
+                grades.addAll(news);
+
+                adapter = new GradesListAdapter(getApplicationContext(),grades);
                 mListView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }
@@ -54,8 +54,5 @@ public class UserDisciplineActivity extends AppCompatActivity {
 
         });
 
-        mListView = (ListView) findViewById(R.id.disciplineListView);
-
     }
-
 }

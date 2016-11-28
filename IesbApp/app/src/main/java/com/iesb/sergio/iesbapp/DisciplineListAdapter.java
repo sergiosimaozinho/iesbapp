@@ -12,9 +12,6 @@ import com.iesb.sergio.iesbapp.model.Discipline;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by henriquesantos on 27/11/16.
- */
 public class DisciplineListAdapter extends ArrayAdapter<Discipline> {
 
 
@@ -37,7 +34,6 @@ public class DisciplineListAdapter extends ArrayAdapter<Discipline> {
         mContext = context;
         itens.addAll(disciplines);
     }
-
 
     public DisciplineListAdapter(Context context, int resource, int textViewResourceId, List<Discipline> objects) {
         super(context, resource, textViewResourceId, objects);
