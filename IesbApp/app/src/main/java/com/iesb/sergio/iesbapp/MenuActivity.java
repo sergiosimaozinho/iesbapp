@@ -15,14 +15,16 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+
 import java.util.ArrayList;
 
-/**
- * Created by henriquesantos on 26/11/16.
- */
+
 public class MenuActivity extends AppCompatActivity {
     private ListView mListView;
     private FirebaseAuth mAuth;
+
+    static final int ASK_QUESTION_REQUEST = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,11 +53,17 @@ public class MenuActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 switch (position) {
+                    case 0:
+                        startActivity(new Intent(MenuActivity.this, UserDisciplineActivity.class));
+                        break;
                     case 1:
                         startActivity(new Intent(MenuActivity.this, GradesActivity.class));
                         break;
                     case 2:
-                        startActivity(new Intent(MenuActivity.this, UserDisciplineActivity.class));
+
+                        Intent intent = new Intent(MenuActivity.this, DisciplineRegisteredActivity.class);
+                        startActivityForResult(intent, ASK_QUESTION_REQUEST);
+
                         break;
                     case 3:
                         startActivity(new Intent("com.iesb.sergio.iesbapp.UserInfoActivity"));
@@ -66,20 +74,24 @@ public class MenuActivity extends AppCompatActivity {
                     case 5:
                         mAuth.signOut();
                         break;
-                    default:
-
-                        int itemPosition  = position;
-                        String  itemValue    = (String) mListView.getItemAtPosition(position);
-
-                        Toast.makeText(getApplicationContext(),
-                                "Position :"+itemPosition+"  ListItem : " +itemValue , Toast.LENGTH_LONG)
-                                .show();
-                        break;
                 }
             }
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ASK_QUESTION_REQUEST) {
+
+            if (resultCode == RESULT_OK) {
+
+                final String result = data.getStringExtra(DisciplineRegisteredActivity.Result_DATA);
+                Toast.makeText(this,result, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 
     private void configureAuthStateListener() {
         FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {

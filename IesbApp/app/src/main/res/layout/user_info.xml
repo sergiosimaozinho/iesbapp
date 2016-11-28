@@ -30,7 +30,8 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textSize="14dp"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -42,7 +43,8 @@
             android:layout_toEndOf="@+id/textView2"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="20dp" />
+            android:textSize="14dp"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +56,8 @@
             android:layout_marginTop="8dp"
             android:layout_alignStart="@+id/textView2"
             android:textStyle="bold"
-            android:textSize="20dp" />
+            android:textSize="14dp"
+            android:textColor="#000000" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -64,7 +67,8 @@
             android:id="@+id/userDateEmail"
             android:layout_alignTop="@+id/textView3"
             android:layout_alignStart="@+id/userDateName"
-            android:textSize="20dp" />
+            android:textSize="14dp"
+            android:textColor="#000000" />
     </RelativeLayout>
 
 </LinearLayout>

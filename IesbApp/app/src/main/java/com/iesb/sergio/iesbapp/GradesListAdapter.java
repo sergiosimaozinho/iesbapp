@@ -55,7 +55,7 @@ public class GradesListAdapter extends ArrayAdapter<Grade> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.list_item,parent,false);
+            convertView = inflater.inflate(R.layout.grade_list_item,parent,false);
             viewHolder.textDisciplineName = (TextView) convertView.findViewById(R.id.materiaTextView);
             viewHolder.textGradeP1 = (TextView) convertView.findViewById(R.id.notaP1TextView);
             viewHolder.textGradeP2 = (TextView) convertView.findViewById(R.id.notaP2TextView);
@@ -73,7 +73,7 @@ public class GradesListAdapter extends ArrayAdapter<Grade> {
         viewHolder.textGradeP1.setText(""+grade.getGradeP1());
         viewHolder.textGradeP2.setText(""+grade.getGradeP2());
         viewHolder.textGradeP3.setText(""+grade.getGradeP3());
-        viewHolder.textFrequence.setText(""+grade.getFrequence());
+        viewHolder.textFrequence.setText(""+grade.getFrequence()+"%");
 
         return convertView;
     }

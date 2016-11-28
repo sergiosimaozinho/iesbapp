@@ -45,6 +45,7 @@
         <activity android:name="com.iesb.sergio.iesbapp.MenuActivity" />
         <activity android:name="com.iesb.sergio.iesbapp.UserDisciplineActivity" />
         <activity android:name="com.iesb.sergio.iesbapp.GradesActivity" />
+        <activity android:name="com.iesb.sergio.iesbapp.DisciplineRegisteredActivity" />
 
     </application>
 

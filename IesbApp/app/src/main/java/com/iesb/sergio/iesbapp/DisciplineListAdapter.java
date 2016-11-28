@@ -71,8 +71,8 @@ public class DisciplineListAdapter extends ArrayAdapter<Discipline> {
         }
 
         viewHolder.textViewMateria.setText(discipline.getName());
-        viewHolder.textViewSala.setText(discipline.getTeacherName());
-        viewHolder.textViewHorario.setText(discipline.getTeacherEmail());
+        viewHolder.textViewSala.setText(discipline.getTeacherEmail());
+        viewHolder.textViewHorario.setText(discipline.getTeacherName());
 
         return convertView;
     }

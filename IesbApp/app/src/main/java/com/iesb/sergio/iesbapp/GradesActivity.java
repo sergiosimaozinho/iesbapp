@@ -33,6 +33,7 @@ public class GradesActivity extends AppCompatActivity {
         setContentView(R.layout.grades);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mListView = (ListView) findViewById(R.id.gradeListView);
 
         mDatabase.child(GRADES_TABLE_NAME).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
