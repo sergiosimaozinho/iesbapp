@@ -30,9 +30,18 @@ public class UserDisciplineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_discipline);
 
+        disciplines.add( new Discipline("Programação Básica","João Paulo", "joaopaulo@gmail.com"));
+        disciplines.add( new Discipline("Matematica","Marcos Vinicius", "marcosvini@gmail.com"));
+        disciplines.add( new Discipline("Banco de Dados","Maria Silva", "mariasilva@gmail.com"));
+        disciplines.add( new Discipline("Sistemas Operacionais","Paulo Oliveira", "paulooliveira@gmail.com"));
+
+
         mListView = (ListView) findViewById(R.id.disciplineListView);
         adapter = new DisciplineListAdapter(getApplicationContext(),disciplines);
 
+        mListView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
 
     }
 

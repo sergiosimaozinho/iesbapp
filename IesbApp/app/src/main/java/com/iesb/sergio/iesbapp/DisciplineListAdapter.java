@@ -35,6 +35,7 @@ public class DisciplineListAdapter extends ArrayAdapter<Discipline> {
     public DisciplineListAdapter(Context context, ArrayList<Discipline> disciplines) {
         super(context, R.layout.list_item,disciplines);
         mContext = context;
+        itens.addAll(disciplines);
     }
 
 
@@ -48,6 +49,7 @@ public class DisciplineListAdapter extends ArrayAdapter<Discipline> {
     public int getCount() {
         return itens.size();
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

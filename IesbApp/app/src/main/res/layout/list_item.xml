@@ -11,7 +11,8 @@
         android:id="@+id/titleTextView"
         android:textStyle="bold"
         android:layout_marginTop="8dp"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        android:textColor="#000000" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -26,7 +27,9 @@
             android:text="Professor :"
             android:id="@+id/textView5"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,7 +38,8 @@
             android:text="Portugues"
             android:id="@+id/disciplinaTextView"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:textColor="#000000" />
     </LinearLayout>
 
     <LinearLayout
@@ -50,7 +54,9 @@
             android:text="E-mail do Professor :"
             android:id="@+id/salaTextView"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp" />
+            android:layout_marginLeft="8dp"
+            android:textColor="#000000"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,7 +65,8 @@
             android:text="B303"
             android:id="@+id/salaTextView"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:textColor="#000000" />
     </LinearLayout>
 
 </LinearLayout>
