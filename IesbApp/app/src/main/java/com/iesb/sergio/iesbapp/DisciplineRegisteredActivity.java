@@ -1,5 +1,6 @@
 package com.iesb.sergio.iesbapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -33,6 +34,7 @@ public class DisciplineRegisteredActivity extends AppCompatActivity {
     private ArrayList<RegisteredDiscipline> grades = new ArrayList<>();
     private DatabaseReference mDatabase;
     private Button saveOfflineButton;
+    private ProgressDialog progressDialog;
 
     private static String REGISTERED_DISCIPLINE_TABLE = "RegisteredDiscpline";
     public static final String Result_DATA = "Sucesso!";
@@ -43,6 +45,13 @@ public class DisciplineRegisteredActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.discipline_registered);
+
+
+        progressDialog = new ProgressDialog(DisciplineRegisteredActivity.this);
+        progressDialog.setMessage("carregando....");
+        progressDialog.setTitle("Buscando dados");
+
+        progressDialog.show();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mListView = (ListView) findViewById(R.id.registeredListView);
@@ -62,6 +71,7 @@ public class DisciplineRegisteredActivity extends AppCompatActivity {
             adapter = new DisciplineRegisteredAdapter(getApplicationContext(),grades);
             mListView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+            progressDialog.dismiss();
 
         }else {
             mDatabase.child(REGISTERED_DISCIPLINE_TABLE).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -75,16 +85,16 @@ public class DisciplineRegisteredActivity extends AppCompatActivity {
                     adapter = new DisciplineRegisteredAdapter(getApplicationContext(),grades);
                     mListView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+                    progressDialog.dismiss();
                 }
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+                    progressDialog.dismiss();
 
                 }
-
             });
         }
-
 
     }
 

@@ -1,5 +1,6 @@
 package com.iesb.sergio.iesbapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,11 +27,16 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText passwordEditText;
     private Button btnRegister;
     private FirebaseAuth mAuth;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        progressDialog = new ProgressDialog(RegisterActivity.this);
+        progressDialog.setMessage("Registrando....");
+        progressDialog.setTitle("Aguarde");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                //  progressBar.setVisibility(View.VISIBLE);
+                progressDialog.show();
 
                 mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -70,12 +76,14 @@ public class RegisterActivity extends AppCompatActivity {
                         if (!task.isSuccessful()) {
                             Toast.makeText(RegisterActivity.this, "Falha ao Cadastrar usuário, verifique se o e-mail ja foi cadastrado",
                                     Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
 
                         } else {
                             saveData();
                             Toast.makeText(RegisterActivity.this, "Registrado com sucesso !",
                                     Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            progressDialog.dismiss();
                             finish();
                         }
                     }

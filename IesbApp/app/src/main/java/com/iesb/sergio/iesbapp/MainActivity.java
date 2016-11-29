@@ -1,5 +1,6 @@
 package com.iesb.sergio.iesbapp;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnSignUp;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setMessage("Efetuando Login....");
+        progressDialog.setTitle("Aguarde");
+
 
         emailEditText = (EditText) findViewById(R.id.emailEditText);
         passwordEditText = (EditText) findViewById(R.id.passwordEditText);
@@ -67,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                progressDialog.show();
+
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -74,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                              //   progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
+                                    progressDialog.dismiss();
                                     // there was an error
                                     if (password.length() < 6) {
                                         Toast.makeText(MainActivity.this, "Senha inválida, a senha deve conter 6 caracteres", Toast.LENGTH_LONG).show();
@@ -83,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                                 } else {
                                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                                     startActivity(intent);
+                                    progressDialog.dismiss();
                                     finish();
                                 }
                             }
@@ -91,8 +100,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-      //  progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         btnRegister.setOnClickListener(new View.OnClickListener(){
             @Override

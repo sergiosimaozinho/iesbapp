@@ -1,5 +1,6 @@
 package com.iesb.sergio.iesbapp;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class GradesActivity extends AppCompatActivity {
     private ListView mListView;
     private ArrayList<Grade> grades = new ArrayList<>();
     private DatabaseReference mDatabase;
+    private ProgressDialog progressDialog;
 
     private static String GRADES_TABLE_NAME = "GradesTable";
 
@@ -31,6 +33,13 @@ public class GradesActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grades);
+
+        progressDialog = new ProgressDialog(GradesActivity.this);
+        progressDialog.setMessage("Efetuando Login....");
+        progressDialog.setTitle("Aguarde");
+
+        progressDialog.show();
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mListView = (ListView) findViewById(R.id.gradeListView);
@@ -46,13 +55,14 @@ public class GradesActivity extends AppCompatActivity {
                 adapter = new GradesListAdapter(getApplicationContext(),grades);
                 mListView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                progressDialog.dismiss();
             }
-
         });
 
     }

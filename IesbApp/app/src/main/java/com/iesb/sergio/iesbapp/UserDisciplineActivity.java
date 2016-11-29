@@ -1,5 +1,6 @@
 package com.iesb.sergio.iesbapp;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -25,6 +26,7 @@ public class UserDisciplineActivity extends AppCompatActivity {
     private ListView mListView;
     private ArrayList<Discipline> disciplines = new ArrayList<>();
     private DatabaseReference mDatabase;
+    private ProgressDialog progressDialog;
 
     private static String USER_TABLE_NAME = "UserDiscipline";
 
@@ -32,6 +34,12 @@ public class UserDisciplineActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_discipline);
+
+        progressDialog = new ProgressDialog(UserDisciplineActivity.this);
+        progressDialog.setMessage("Buscando Dados....");
+        progressDialog.setTitle("Aguarde");
+
+        progressDialog.show();
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -45,10 +53,13 @@ public class UserDisciplineActivity extends AppCompatActivity {
                 adapter = new DisciplineListAdapter(getApplicationContext(),disciplines);
                 mListView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                progressDialog.dismiss();
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+
+                progressDialog.dismiss();
 
             }
 
